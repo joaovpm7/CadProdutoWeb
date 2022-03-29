@@ -157,4 +157,31 @@ public class Produto {
             return false;
         }
     }
+
+    public boolean BuscarPorId(String id) {
+        try {
+            long idprod = Long.parseLong(id);
+            Connection conn = BancoDados.getConexao();
+            String sql = "SELECT * FROM tb_produto WHERE id = ?; ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setLong(1, idprod);
+            final ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                //id, nome, categoria, descricao, quantidade, preco, datacadastro
+                this.setId(rs.getInt("id"));
+                this.setNome(rs.getString("nome"));
+                this.setCategoria(rs.getString("categoria"));
+                this.setDescricao(rs.getString("descricao"));
+                this.setQuantidade(rs.getInt("quantidade"));
+                this.setPreco(rs.getDouble("preco"));
+                this.setDatacadastro(rs.getTimestamp("datacadastro"));
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

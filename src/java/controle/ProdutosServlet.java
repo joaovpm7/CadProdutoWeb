@@ -33,16 +33,14 @@ public class ProdutosServlet extends HttpServlet {
             throws ServletException, IOException {
 
         if (request.getParameter("editar") != null) {
-            //... código para editar
 
         } else if (request.getParameter("apagar") != null) {
-            
+
             int pac = Integer.parseInt(request.getParameter("apagar"));
             Produto.Excluir(pac);
             String mensagem
-                        = "<h1>Produto Apagado com Sucesso</h1>";
-                response.getWriter().print(mensagem);
-            
+                    = "<h1>Produto Apagado com Sucesso</h1>";
+            response.getWriter().print(mensagem);
 
         } else {
             response.setContentType("text/html;charset=UTF-8");

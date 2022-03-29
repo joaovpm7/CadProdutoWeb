@@ -55,24 +55,34 @@
                     out.print("<td>");
                     out.print(c.getPreco());
                     out.print("</td>");
-                    
+
                     out.print("<td>");
                     out.print(c.getDatacadastro());
                     out.print("</td>");
 
                     out.print("<td>");
-                    out.print("<form action='ProdutosServlet' method='POST'>");
-                    out.print("<input name='editar' type='hidden' value='" + c.getId() + "' />");
+
+                    out.print("<div style='display:inline-block'>");;
+                    out.print("<form action='index.jsp' method='POST'>");
+                    out.print("<input name='acao' type='hidden' value='editar' />");
+                    out.print("<input name='idproduto' type='hidden' value='" + c.getId() + "' />");
                     out.print("<button type='submit'>Editar</button>");
                     out.print("</form>");
-
+                    out.print("</div>");
+                    
+                    out.print("&nbsp;");
+                    out.print("&nbsp;");
+                    
+                    out.print("<div style='display:inline-block'>");
                     out.print("<form action='ProdutosServlet' method='POST'>");
-                    out.print("<input name='apagar' type='hidden' value='" + c.getId() + "' />");
+                    out.print("<input name='acao' type='hidden' value='apagar' />");
+                    out.print("<input name='idproduto' type='hidden' value='" + c.getId() + "' />");
                     out.print("<button type='submit'>Deletar</button>");
                     out.print("</form>");
+                    out.print("</div>");
+                    
                     out.print("</td>");
-
-                    out.print("<tr>");
+                    out.print("</tr>");
                 }
             %>
         </table>

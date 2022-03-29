@@ -32,16 +32,35 @@ public class ProdutosServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (request.getParameter("editar") != null) {
-
-        } else if (request.getParameter("apagar") != null) {
-
+        if (request.getParameter("acao").equals("editar")) {
+            String idproduto = request.getParameter("idproduto");
+            String nome = request.getParameter("nome");
+            String categoria = request.getParameter("categoria");
+            String descricao = request.getParameter("descricao");
+            int quantidade = Integer.parseInt(request.getParameter("quantidade"));
+            double preco = Double.parseDouble(request.getParameter("preco"));
+            Produto prod = new Produto();
+            prod.setId(Long.parseLong(idproduto));
+            prod.setNome(nome);
+            prod.setCategoria(categoria);
+            prod.setDescricao(descricao);
+            prod.setQuantidade(quantidade);
+            prod.setPreco(preco);
+            boolean atualizou = prod.Atualizar();
+            if (atualizou) {
+                //Somente redireciona a página escolhida
+                response.sendRedirect("listar.jsp");
+            } else {
+                String mensagem
+                        = "<h1>Edição não Efetuado com Sucesso</h1>";
+                response.getWriter().print(mensagem);
+            }
+        } else if (request.getParameter("acao").equals("apagar")) {
             int pac = Integer.parseInt(request.getParameter("apagar"));
             Produto.Excluir(pac);
             String mensagem
                     = "<h1>Produto Apagado com Sucesso</h1>";
             response.getWriter().print(mensagem);
-
         } else {
             response.setContentType("text/html;charset=UTF-8");
             String nome = request.getParameter("nome");
@@ -49,16 +68,13 @@ public class ProdutosServlet extends HttpServlet {
             String descricao = request.getParameter("descricao");
             int quantidade = Integer.parseInt(request.getParameter("quantidade"));
             double preco = Double.parseDouble(request.getParameter("preco"));
-
             Produto prod = new Produto();
             prod.setNome(nome);
             prod.setCategoria(categoria);
             prod.setDescricao(descricao);
             prod.setQuantidade(quantidade);
             prod.setPreco(preco);
-
             long novoid = prod.Cadastrar();
-
             if (novoid > 0) {
                 //Somente redireciona a página escolhida
                 response.sendRedirect("listar.jsp");

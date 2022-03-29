@@ -184,4 +184,35 @@ public class Produto {
             return false;
         }
     }
+
+    public boolean Atualizar() {
+        try {
+            Connection conn = BancoDados.getConexao(); //conectar com o bando de dados e enviar os dados salvos da classe Contato.
+            //id, nome, categoria, descricao, quantidade, preco, datacadastro
+            String sql = "UPDATE tb_produto ";
+            sql += " SET nome = ?, ";
+            sql += " categoria = ?, ";
+            sql += " descricao = ?, ";
+            sql += " quantidade = ?, ";
+            sql += " preco = ? ";
+            sql += " WHERE id = ?; ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, this.getNome());
+            ps.setString(2, this.getCategoria());
+            ps.setString(3, this.getDescricao());
+            ps.setInt(4, this.getQuantidade());
+            ps.setDouble(5, this.getPreco());
+            ps.setLong(6, this.getId());
+            int linhasafetadas = ps.executeUpdate();
+            if (linhasafetadas > 0) {
+                System.out.println("atualizou!");
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false;
+        }
+    }
 }

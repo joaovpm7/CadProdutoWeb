@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    String idproduto = "", nome = "", categoria = "",
+    String acao = "cadastrar", idproduto = "", nome = "", categoria = "",
             quantidade = "", preco = "", datacadastro = "", descricao = "";
 
     Produto prod = new Produto();
@@ -17,6 +17,7 @@
                         + "</script>");
             } else {
                 //id, nome, categoria, descricao, quantidade, preco, datacadastro
+                acao = "editar";
                 idproduto = String.valueOf(prod.getId());
                 nome = prod.getNome();
                 categoria = prod.getCategoria();
@@ -38,7 +39,7 @@
     </head>
     <body>
         <form action="ProdutosServlet" method="POST">
-            <input type="hidden" name="acao" value="editar"
+            <input type="hidden" name="acao" value="<%= acao %>"
                    <h1>
                 Cadastro de Produtos
             </h1>
@@ -68,14 +69,22 @@
                     <td>
                         <label for="txtCategoria">Categoria:<br></label>
                         <select id="sltCategoria" name="categoria" value="<%=categoria%>">
-                            <option value="AC">Acessórios</option>
-                            <option value="EL">Eletrônicos</option>
-                            <option value="GM">Games</option>
-                            <option value="IF">Informática</option>
-                            <option value="TL">Telefone</option>
-                            <option value="CM">Cama, Mesa e Banho</option>
-                            <option value="FM">Ferramentas</option>
-                            <option value="LV">Livros</option>
+                            <option <%= categoria.equals("AC") ? "selected": "" %> 
+                                value="AC">Acessórios</option>
+                            <option <%= categoria.equals("LE") ? "selected": "" %>
+                                value="EL">Eletrônicos</option>
+                            <option <%= categoria.equals("GM") ? "selected": "" %>
+                                value="GM">Games</option>
+                            <option <%= categoria.equals("IF") ? "selected": "" %>
+                                value="IF">Informática</option>
+                            <option <%= categoria.equals("TL") ? "selected": "" %>
+                                value="TL">Telefone</option>
+                            <option <%= categoria.equals("CM") ? "selected": "" %>
+                                value="CM">Cama, Mesa e Banho</option>
+                            <option <%= categoria.equals("FM") ? "selected": "" %>
+                                value="FM">Ferramentas</option>
+                            <option <%= categoria.equals("LV") ? "selected": "" %>
+                                value="LV">Livros</option>
                         </select>
                     </td>
                     <td>

@@ -135,7 +135,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="text-align: center;">
+                    <td colspan="2" style="text-align: center;">
                         <input type="submit" value="Cadastrar"/>
                     </td>
                 </tr>

@@ -56,13 +56,12 @@ public class ProdutosServlet extends HttpServlet {
                 response.getWriter().print(mensagem);
             }
         } else if (request.getParameter("acao").equals("apagar")) {
-            int pac = Integer.parseInt(request.getParameter("apagar"));
+            int pac = Integer.parseInt(request.getParameter("idproduto"));
             Produto.Excluir(pac);
             String mensagem
                     = "<h1>Produto Apagado com Sucesso</h1>";
             response.getWriter().print(mensagem);
         } else {
-            response.setContentType("text/html;charset=UTF-8");
             String nome = request.getParameter("nome");
             String categoria = request.getParameter("categoria");
             String descricao = request.getParameter("descricao");
